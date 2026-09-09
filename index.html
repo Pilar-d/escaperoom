@@ -85,7 +85,7 @@
 
         .container {
             width: 100%;
-            max-width: 780px;
+            max-width: 840px;
             background: var(--card-bg);
             border: 2px solid var(--accent-gold);
             border-radius: 10px;
@@ -179,6 +179,19 @@
             box-shadow: 0 0 14px var(--accent-gold);
         }
 
+        /* Botón secundario para lectura de PDF */
+        .btn-secondary {
+            background: linear-gradient(180deg, #382c23 0%, #1f1813 100%);
+            border: 1px solid #755a3d;
+            color: var(--accent-gold-light);
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background: linear-gradient(180deg, #4f3d2f 0%, #292019 100%);
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
+        }
+
         .error-msg {
             color: #ff6868;
             font-size: clamp(0.85rem, 2.2vw, 0.95rem);
@@ -224,7 +237,7 @@
         }
 
         /* ========================================================
-           SOBRE REALISTA CON FÍSICAS FLUIDAS Y SELLO CENTRAL
+           SOBRE REALISTA FLUIDO CON SELLO CENTRAL
            ======================================================== */
         .envelope-scene {
             width: 100%;
@@ -258,7 +271,6 @@
             box-shadow: 0 16px 30px rgba(0,0,0,0.75);
         }
 
-        /* 1. Solapa superior triangular con punto de pivote exacto en la cima */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -268,13 +280,11 @@
             background: var(--env-flap);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top center;
-            /* Transición fluida de apertura (0.55s) y cierre en reversa */
             transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.28s;
             z-index: 5;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
 
-        /* Sello de lacre ubicado en la punta del triángulo (cierre real) */
         .wax-seal {
             position: absolute;
             bottom: 6px;
@@ -297,7 +307,6 @@
             pointer-events: none;
         }
 
-        /* 2. Bolsillos laterales e inferior que crean la cavidad real */
         .envelope-pocket-left {
             position: absolute;
             bottom: 0;
@@ -336,7 +345,6 @@
             filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.25));
         }
 
-        /* 3. Carta / Hoja pergamino interior */
         .letter-paper {
             position: absolute;
             left: 6%;
@@ -352,19 +360,17 @@
             font-style: italic;
             font-size: clamp(0.92rem, 2.3vw, 1.05rem);
             line-height: 1.5;
-            z-index: 2; /* Comienza dentro de la bolsa, tapada por los bolsillos */
+            z-index: 2;
             box-sizing: border-box;
-            /* Transición fluida con retraso coordinado cuando la solapa se levanta */
             transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s, 
                         z-index 0.01s 0.35s, 
                         box-shadow 0.65s ease 0.15s;
             overflow: hidden;
         }
 
-        /* --- ESTADO ABIERTO: SINCRONIZACIÓN DE FÍSICA --- */
         .envelope-scene.open .envelope-flap {
             transform: rotateX(180deg);
-            z-index: 1; /* Pasa detrás de la carta una vez abierta */
+            z-index: 1;
             transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.28s;
         }
 
@@ -374,7 +380,6 @@
         }
 
         .envelope-scene.open .letter-paper {
-            /* Sale del sobre hacia arriba y se posiciona en primer plano */
             transform: translateY(-135px);
             z-index: 10;
             height: auto;
@@ -384,10 +389,9 @@
         }
 
         .envelope-scene.open {
-            margin-bottom: 165px; /* Crea espacio limpio hacia el formulario sin superposiciones */
+            margin-bottom: 165px;
         }
 
-        /* Ajustes precisos para pantallas pequeñas */
         @media (max-width: 480px) {
             .envelope {
                 height: 180px;
@@ -417,6 +421,96 @@
             margin-top: clamp(16px, 3vw, 24px);
             border-top: 1px solid rgba(197, 160, 89, 0.25);
             padding-top: clamp(14px, 3vw, 20px);
+        }
+
+        /* ========================================================
+           VISOR DE PDF ADAPTABLE (BAJO EL INPUT)
+           ======================================================== */
+        .pdf-section {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pdf-viewer-container {
+            display: none; /* Oculto inicialmente */
+            width: 100%;
+            margin-top: 10px;
+            background: #141112;
+            border: 2px solid var(--accent-gold);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.75);
+            animation: slideDown 0.4s ease-out forwards;
+        }
+
+        .pdf-viewer-container.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pdf-header-bar {
+            background: #251d18;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pdf-header-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold-light);
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pdf-header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .pdf-btn-small {
+            background: #3d2f24;
+            border: 1px solid var(--accent-gold);
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: 0.2s;
+        }
+
+        .pdf-btn-small:hover {
+            background: #5a4535;
+        }
+
+        .pdf-frame-wrapper {
+            position: relative;
+            width: 100%;
+            height: clamp(380px, 60vh, 580px); /* Altura fluida que no desborda */
+            background: #2b2b2b;
+        }
+
+        .pdf-frame-wrapper object,
+        .pdf-frame-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .victory-banner {
@@ -471,7 +565,7 @@
             <button type="button" class="btn" onclick="startEscapeRoom()">Abrir Primer Sobre</button>
         </section>
 
-        <!-- VISTA JUEGO: SOBRES REALISTAS -->
+        <!-- VISTA JUEGO: SOBRES REALISTAS Y PDF DE APOYO -->
         <section id="view-game" class="view-section">
             <div class="progress-bar">
                 <div class="step-circle" id="step-1">1</div>
@@ -497,14 +591,14 @@
                     <!-- Carta interior que sube suavemente -->
                     <div class="letter-paper" id="letter-content"></div>
 
-                    <!-- Capas del bolsillo para generar profundidad real -->
+                    <!-- Capas del bolsillo -->
                     <div class="envelope-pocket-left"></div>
                     <div class="envelope-pocket-right"></div>
                     <div class="envelope-pocket-bottom"></div>
                 </div>
             </div>
 
-            <!-- Desbloqueo y Clave secreta -->
+            <!-- Desbloqueo, Clave secreta y Sección del PDF -->
             <div class="solve-container">
                 <div class="form-group">
                     <label for="secret-code">Para continuar con la siguiente sección, ingresa la clave secreta:</label>
@@ -512,6 +606,32 @@
                 </div>
                 <button type="button" class="btn" onclick="validateStepCode()">Validar Clave</button>
                 <div id="game-error" class="error-msg"></div>
+
+                <!-- SECCIÓN DE LECTURA DEL PDF (BAJO EL INPUT DE CONTRASEÑA) -->
+                <div class="pdf-section">
+                    <button type="button" class="btn btn-secondary" id="toggle-pdf-btn" onclick="togglePdfViewer()">
+                        📖 Leer PDF del Enigma (Consultar Material)
+                    </button>
+
+                    <div class="pdf-viewer-container" id="pdf-viewer-box">
+                        <div class="pdf-header-bar">
+                            <span class="pdf-header-title">📄 Documento: La Caída de la Casa de Usher </span>
+                            <div class="pdf-header-actions">
+                                <a id="pdf-external-link" href="750La-Caida-de-la-Casa-de-Usher.pdf" target="_blank" class="pdf-btn-small">
+                                    ↗ Pantalla Completa
+                                </a>
+                                <button type="button" class="pdf-btn-small" onclick="togglePdfViewer()">
+                                    ✕ Cerrar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pdf-frame-wrapper">
+                            <!-- El lector PDF se inyecta dinámicamente al abrir -->
+                            <div id="pdf-container-target" style="width: 100%; height: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -537,6 +657,12 @@
     </div>
 
     <script>
+        /* ==========================================
+           CONFIGURACIÓN DEL ARCHIVO PDF
+           Coloca el archivo PDF en la misma carpeta
+           ========================================== */
+        const PDF_FILE_URL = "750La-Caida-de-la-Casa-de-Usher.pdf";
+
         /* 1. USUARIOS Y CONTRASEÑAS (grupo1 a grupo14 / clave1 a clave14) */
         const USERS = {};
         for(let i = 1; i <= 14; i++) {
@@ -576,6 +702,7 @@
         ];
 
         let currentStage = 0;
+        let pdfLoaded = false;
 
         function switchView(viewId) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
@@ -644,6 +771,49 @@
             }
         }
 
+        /* ========================================================
+           CONTROLADOR DEL VISOR DE PDF
+           ======================================================== */
+        function togglePdfViewer() {
+            const pdfBox = document.getElementById('pdf-viewer-box');
+            const toggleBtn = document.getElementById('toggle-pdf-btn');
+            const containerTarget = document.getElementById('pdf-container-target');
+            const externalLink = document.getElementById('pdf-external-link');
+
+            // Actualizar enlace directo al PDF
+            externalLink.setAttribute('href', PDF_FILE_URL);
+
+            const isVisible = pdfBox.classList.contains('visible');
+
+            if (!isVisible) {
+                pdfBox.classList.add('visible');
+                toggleBtn.innerText = "🔼 Ocultar Lector PDF";
+
+                // Carga diferida del elemento embed/iframe solo cuando se abre
+                if (!pdfLoaded) {
+                    containerTarget.innerHTML = `
+                        <object data="${PDF_FILE_URL}#toolbar=1&navpanes=0&scrollbar=1" type="application/pdf" width="100%" height="100%">
+                            <iframe src="${PDF_FILE_URL}#toolbar=1" width="100%" height="100%" style="border:none;">
+                                <p style="color: #fff; padding: 20px; text-align: center;">
+                                    Tu navegador no soporta vista previa directa. 
+                                    <a href="${PDF_FILE_URL}" target="_blank" style="color: var(--accent-gold);">Haz clic aquí para abrir el PDF</a>.
+                                </p>
+                            </iframe>
+                        </object>
+                    `;
+                    pdfLoaded = true;
+                }
+
+                // Desplazamiento suave hacia el lector sin tapar la parte superior
+                setTimeout(() => {
+                    pdfBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                pdfBox.classList.remove('visible');
+                toggleBtn.innerText = "📖 Leer PDF del Enigma (Consultar Material)";
+            }
+        }
+
         /* Validación del código */
         function validateStepCode() {
             const input = document.getElementById('secret-code').value.trim().toUpperCase();
@@ -669,7 +839,7 @@
                     switchView('view-victory');
                 }
             } else {
-                errorDiv.innerText = 'Clave incorrecta. Analiza con cuidado la pista en el pergamino.';
+                errorDiv.innerText = 'Clave incorrecta. Analiza con cuidado la pista en el pergamino o en el PDF.';
             }
         }
 
