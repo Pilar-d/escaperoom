@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Escape Room Literario - El Enigma de la Casa Usher</title>
-    <!-- Google Fonts con precarga -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark: #0d0a0b;
-            --card-bg: rgba(26, 21, 20, 0.94);
+            --bg-dark: #0a0809;
+            --card-bg: rgba(22, 18, 17, 0.96);
             --accent-gold: #c5a059;
-            --accent-gold-light: #e8ca85;
-            --parchment: #f4ecd8;
-            --danger: #9c2727;
-            --border-glow: rgba(197, 160, 89, 0.35);
+            --accent-gold-light: #f0d599;
+            --parchment: #f6edd9;
+            --parchment-border: #d8c49d;
+            --envelope-base: #3b281c;
+            --envelope-pocket: #4a3424;
+            --envelope-flap: #5c412d;
+            --wax-red: #8b1e1e;
         }
 
         * {
@@ -30,35 +33,34 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(60, 48, 42, 0.5) 0%, rgba(10, 8, 9, 0.98) 80%),
+                radial-gradient(circle at 50% 15%, rgba(65, 48, 40, 0.5) 0%, rgba(10, 8, 9, 0.98) 75%),
                 linear-gradient(to bottom, transparent, #000 95%);
             color: #d6cfc7;
             font-family: 'IM Fell English', serif;
             min-height: 100vh;
-            min-height: 100dvh; /* Soporte dinámico para navegadores móviles */
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: clamp(12px, 3vw, 28px);
-            padding-top: calc(clamp(12px, 3vw, 28px) + env(safe-area-inset-top));
-            padding-bottom: calc(clamp(12px, 3vw, 28px) + env(safe-area-inset-bottom));
+            padding: clamp(12px, 3vw, 24px);
+            padding-top: calc(clamp(12px, 3vw, 24px) + env(safe-area-inset-top));
+            padding-bottom: calc(clamp(12px, 3vw, 24px) + env(safe-area-inset-bottom));
         }
 
-        /* Tipografía adaptativa */
         h1 {
             font-family: 'Cinzel', serif;
             font-size: clamp(1.4rem, 4.5vw, 2.2rem);
             letter-spacing: clamp(1px, 0.3vw, 2.5px);
             color: var(--accent-gold);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
             text-align: center;
-            line-height: 1.25;
+            line-height: 1.2;
             margin-bottom: 6px;
         }
 
         h2 {
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 3.8vw, 1.7rem);
+            font-size: clamp(1.15rem, 3.8vw, 1.6rem);
             color: var(--accent-gold);
             text-align: center;
             letter-spacing: 1.5px;
@@ -67,31 +69,29 @@
 
         .subtitle {
             text-align: center;
-            font-size: clamp(0.85rem, 2.3vw, 1.05rem);
+            font-size: clamp(0.85rem, 2.2vw, 1.05rem);
             color: #a39587;
-            margin-bottom: clamp(16px, 3vw, 26px);
+            margin-bottom: clamp(16px, 3vw, 24px);
             text-transform: uppercase;
             letter-spacing: 2px;
-            line-height: 1.4;
         }
 
         p {
-            font-size: clamp(1rem, 2.4vw, 1.15rem);
+            font-size: clamp(1rem, 2.3vw, 1.15rem);
             line-height: 1.6;
             margin-bottom: 16px;
         }
 
-        /* Contenedor adaptativo */
         .container {
             width: 100%;
-            max-width: 760px;
+            max-width: 780px;
             background: var(--card-bg);
             border: 2px solid var(--accent-gold);
             border-radius: 10px;
-            box-shadow: 0 0 30px var(--border-glow), 0 10px 40px rgba(0,0,0,0.85);
-            padding: clamp(18px, 4.5vw, 36px);
+            box-shadow: 0 0 35px rgba(197, 160, 89, 0.35), 0 10px 40px rgba(0,0,0,0.9);
+            padding: clamp(16px, 4vw, 36px);
             position: relative;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(6px);
             margin: auto;
         }
 
@@ -114,11 +114,10 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Formularios e interacción táctil */
         .form-group {
             margin-bottom: 18px;
             display: flex;
@@ -130,21 +129,20 @@
             font-family: 'Cinzel', serif;
             color: var(--accent-gold-light);
             font-size: clamp(0.85rem, 2.2vw, 0.95rem);
-            letter-spacing: 1px;
         }
 
         input[type="text"], input[type="password"] {
             width: 100%;
-            min-height: 48px; /* Tamaño ideal para dedos en smartphones */
-            background: #120f0f;
+            min-height: 48px;
+            background: #110e0e;
             border: 1px solid var(--accent-gold);
             padding: 10px 14px;
             color: var(--parchment);
             font-family: inherit;
             font-size: clamp(1rem, 2.5vw, 1.15rem);
-            border-radius: 5px;
+            border-radius: 4px;
             outline: none;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: 0.25s;
         }
 
         input[type="text"]:focus, input[type="password"]:focus {
@@ -167,7 +165,7 @@
             font-weight: 700;
             letter-spacing: 1.5px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: all 0.25s ease;
             text-align: center;
             margin-top: 15px;
@@ -178,19 +176,17 @@
         .btn:hover, .btn:active {
             background: linear-gradient(180deg, #ab8c4e 0%, #634f26 100%);
             box-shadow: 0 0 14px var(--accent-gold);
-            transform: translateY(-1px);
         }
 
         .error-msg {
-            color: #ff7070;
+            color: #ff6868;
             font-size: clamp(0.85rem, 2.2vw, 0.95rem);
             text-align: center;
-            margin-top: 12px;
+            margin-top: 10px;
             min-height: 22px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        /* Barra de progreso de vistas */
         .progress-bar {
             display: flex;
             justify-content: center;
@@ -210,7 +206,7 @@
             font-weight: bold;
             color: #8c7865;
             font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-            transition: all 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .step-circle.active {
@@ -226,104 +222,185 @@
             background: transparent;
         }
 
-        /* Estructura del Sobre interactivo */
-        .envelope-wrapper {
-            background: #251d19;
-            border: 2px solid var(--accent-gold);
-            border-radius: 6px;
-            padding: clamp(14px, 3vw, 18px);
+        /* ========================================================
+           ANIMACIÓN DEL SOBRE REALISTA EN CSS 3D
+           ======================================================== */
+        .envelope-scene {
+            width: 100%;
+            max-width: 440px;
+            margin: 25px auto;
+            perspective: 1200px;
             cursor: pointer;
-            margin: clamp(18px, 3.5vw, 24px) 0;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
             user-select: none;
-            transition: border-color 0.25s ease;
         }
 
-        .envelope-wrapper:active, .envelope-wrapper:hover {
-            border-color: var(--accent-gold-light);
-        }
-
-        .envelope-header {
+        .envelope-hint {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+            color: var(--accent-gold-light);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            flex-wrap: wrap;
-            color: var(--accent-gold-light);
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+            justify-content: center;
+            gap: 8px;
         }
 
-        .envelope-content {
-            display: none;
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: var(--envelope-base);
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.7);
+            transition: transform 0.4s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Solapa superior plegable con rotación 3D */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 220px solid transparent;
+            border-right: 220px solid transparent;
+            border-top: 130px solid var(--envelope-flap);
+            transform-origin: top center;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.35s;
+            z-index: 5;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+        }
+
+        /* Sello de lacre */
+        .wax-seal {
+            position: absolute;
+            top: -145px;
+            left: -24px;
+            width: 48px;
+            height: 48px;
+            background: radial-gradient(circle, #aa2424 0%, var(--wax-red) 70%, #5e0d0d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffc7c7;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.6), inset 0 0 4px rgba(0,0,0,0.4);
+            border: 2px dashed #991f1f;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        /* Bolsillo frontal del sobre */
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 220px solid var(--envelope-pocket);
+            border-right: 220px solid var(--envelope-pocket);
+            border-bottom: 120px solid #2f2015;
+            border-top: 100px solid transparent;
+            border-radius: 0 0 8px 8px;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* Hoja de papel (Carta) contenida adentro */
+        .letter-paper {
+            position: absolute;
+            left: 5%;
+            top: 10px;
+            width: 90%;
+            height: 190px;
             background: var(--parchment);
             color: #241913;
-            padding: clamp(16px, 3.5vw, 24px);
+            padding: 16px 20px;
             border-radius: 4px;
-            margin-top: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid var(--parchment-border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.35);
             font-style: italic;
-            border-left: 5px solid #6b1414;
-            user-select: text;
-            animation: unfold 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            font-size: clamp(0.92rem, 2.3vw, 1.05rem);
+            line-height: 1.5;
+            z-index: 3;
+            box-sizing: border-box;
+            transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.15) 0.5s, z-index 0.1s 0.6s, height 0.4s ease 0.8s;
+            overflow: hidden;
         }
 
-        .envelope-wrapper.open .envelope-content {
-            display: block;
+        /* --- ESTADO ABIERTO: ANIMACIÓN --- */
+        .envelope-scene.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
         }
 
-        @keyframes unfold {
-            0% { opacity: 0; transform: translateY(-5px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .envelope-scene.open .wax-seal {
+            opacity: 0;
+            transform: scale(0.6);
         }
 
-        .badge {
-            background: #4a1c1c;
-            color: #ffd8d8;
-            font-size: clamp(0.7rem, 2vw, 0.8rem);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-family: 'Cinzel', serif;
-            border: 1px solid #7c3131;
-            white-space: nowrap;
+        .envelope-scene.open .letter-paper {
+            transform: translateY(-130px);
+            z-index: 10;
+            height: auto;
+            min-height: 220px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.65);
+            overflow: visible;
         }
 
-        /* Desbloqueo / Clave secreta */
+        .envelope-scene.open {
+            margin-bottom: 160px; /* Espacio para que la carta no tape el input */
+        }
+
+        /* Responsive para pantallas móviles (ancho del sobre menor a 440px) */
+        @media (max-width: 480px) {
+            .envelope {
+                height: 180px;
+            }
+            .envelope-flap {
+                border-left-width: 44vw;
+                border-right-width: 44vw;
+                border-top-width: 105px;
+            }
+            .envelope-pocket {
+                border-left-width: 44vw;
+                border-right-width: 44vw;
+                border-bottom-width: 95px;
+                border-top-width: 85px;
+            }
+            .letter-paper {
+                height: 155px;
+                padding: 14px;
+            }
+            .envelope-scene.open .letter-paper {
+                transform: translateY(-110px);
+            }
+            .envelope-scene.open {
+                margin-bottom: 150px;
+            }
+        }
+
         .solve-container {
             margin-top: clamp(16px, 3vw, 24px);
             border-top: 1px solid rgba(197, 160, 89, 0.25);
             padding-top: clamp(14px, 3vw, 20px);
         }
 
-        .info-box {
-            background: rgba(0,0,0,0.35);
-            padding: 14px;
-            border-left: 3px solid var(--accent-gold);
-            font-size: clamp(0.9rem, 2.2vw, 1rem);
-            margin-bottom: 18px;
-        }
-
-        /* Pantalla final de victoria */
         .victory-banner {
             text-align: center;
-            padding: clamp(18px, 4vw, 32px);
+            padding: clamp(20px, 4vw, 34px);
             background: rgba(197, 160, 89, 0.08);
             border: 2px dashed var(--accent-gold);
             border-radius: 8px;
-        }
-
-        /* Pantallas muy pequeñas (≤ 400px) */
-        @media (max-width: 400px) {
-            .container {
-                padding: 14px;
-            }
-            .envelope-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .btn {
-                letter-spacing: 1px;
-            }
         }
     </style>
 </head>
@@ -342,7 +419,7 @@
 
             <form id="login-form">
                 <div class="form-group">
-                    <label for="username">Usuario (Ej: grupo1 al 14)</label>
+                    <label for="username">Usuario (grupo1 al grupo14)</label>
                     <input type="text" id="username" placeholder="grupo1" required autocomplete="off" autocapitalize="none">
                 </div>
                 <div class="form-group">
@@ -361,16 +438,16 @@
             
             <p><strong>Apreciados detectives:</strong> Una melancolía insoportable envuelve estos muros. Una grieta recorre la fachada y la cordura de nuestra estirpe se desmorona. Las pesadas puertas de roble se han cerrado tras ustedes...</p>
             
-            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán descifrar <strong>4 sobres de seguridad consecutivos</strong>.</p>
+            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán abrir y resolver <strong>4 sobres de seguridad consecutivos</strong>.</p>
             
-            <div class="info-box">
-                ⏳ <strong>Reglas del Enigma:</strong> Disponen de 60 minutos. Si se detienen más de 5 minutos, el vocero puede pedir una pista a la docente, pero todo el grupo deberá guardar estricto silencio por 1 minuto.
-            </div>
+            <p style="background: rgba(0,0,0,0.35); padding: 14px; border-left: 3px solid var(--accent-gold); font-size: clamp(0.9rem, 2.2vw, 1rem);">
+                ⏳ <strong>Reglas del Enigma:</strong> Cuentan con un máximo de 60 minutos. Si se quedan estancados más de 5 minutos, el vocero puede solicitar una pista a la docente a cambio de que todo el grupo permanezca en silencio absoluto por 1 minuto.
+            </p>
 
             <button type="button" class="btn" onclick="startEscapeRoom()">Abrir Primer Sobre</button>
         </section>
 
-        <!-- VISTA JUEGO: SOBRES 1 AL 4 -->
+        <!-- VISTA JUEGO: SOBRES REALISTAS INTERACTIVOS -->
         <section id="view-game" class="view-section">
             <div class="progress-bar">
                 <div class="step-circle" id="step-1">1</div>
@@ -382,22 +459,30 @@
             <h2 id="room-title">SOBRE DE SEGURIDAD N° 1</h2>
             <div class="subtitle" id="room-subtitle">Primera Evidencia</div>
 
-            <!-- Sobre interactivo -->
-            <div class="envelope-wrapper" id="envelope-box" onclick="toggleEnvelope()">
-                <div class="envelope-header">
-                    <span>📜 <strong id="envelope-tag">SOBRE CERRADO</strong> (Toca para abrir)</span>
-                    <span class="badge" id="envelope-badge">CERRADO</span>
+            <!-- ESCENA DEL SOBRE REALISTA -->
+            <div class="envelope-scene" id="envelope-scene" onclick="toggleEnvelope()">
+                <div class="envelope-hint">
+                    <span id="envelope-action-text">✉️ Haz clic en el sobre para romper el sello</span>
                 </div>
-                <div class="envelope-content" id="envelope-text">
-                    <!-- Texto de la pista -->
+                <div class="envelope">
+                    <!-- Solapa plegable 3D -->
+                    <div class="envelope-flap">
+                        <div class="wax-seal">U</div>
+                    </div>
+                    <!-- Carta interior que sube -->
+                    <div class="letter-paper" id="letter-content">
+                        <!-- El texto del enigma se inyecta aquí -->
+                    </div>
+                    <!-- Bolsillo exterior -->
+                    <div class="envelope-pocket"></div>
                 </div>
             </div>
 
-            <!-- Entrada de la clave secreta -->
+            <!-- Desbloqueo y Clave secreta -->
             <div class="solve-container">
                 <div class="form-group">
                     <label for="secret-code">Para continuar con la siguiente sección, ingresa la clave secreta:</label>
-                    <input type="text" id="secret-code" placeholder="Escribe el código aquí..." autocomplete="off" autocapitalize="none">
+                    <input type="text" id="secret-code" placeholder="Escribe el código descubierto..." autocomplete="off" autocapitalize="none">
                 </div>
                 <button type="button" class="btn" onclick="validateStepCode()">Validar Clave</button>
                 <div id="game-error" class="error-msg"></div>
@@ -409,56 +494,56 @@
             <div class="victory-banner">
                 <h1>¡LO LOGRASTE!</h1>
                 <h2>MISTERIO RESUELTO</h2>
-                <div class="subtitle" style="color: var(--accent-gold-light); margin-top: 10px;">¡Han escapado de la mansión con vida!</div>
+                <div class="subtitle" style="color: var(--accent-gold-light); margin-top: 10px;">¡Han escapado de la Casa Usher!</div>
                 
                 <p style="font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin: 20px 0;">
-                    ¡Felicitaciones al equipo que logró descifrar el enigma de los Usher antes de que el estanque consumiera la mansión!
+                    ¡Felicitaciones al equipo que logró descifrar todos los enigmas y salvar su vida antes de que la mansión colapsara!
                 </p>
 
                 <p style="font-size: clamp(0.9rem, 2.2vw, 1rem); color: #a39587;">
-                    Han completado los 4 retos literarios con éxito.
+                    Han completado con éxito la actividad del Escape Room Literario.
                 </p>
 
-                <button class="btn" onclick="location.reload()" style="max-width: 280px; margin: 25px auto 0;">Reiniciar Juego</button>
+                <button class="btn" onclick="location.reload()" style="max-width: 280px; margin: 25px auto 0;">Jugar de Nuevo</button>
             </div>
         </section>
 
     </div>
 
     <script>
-        /* 1. USUARIOS Y CONTRASEÑAS PREDETERMINADAS (grupo1 a grupo14) */
+        /* 1. USUARIOS Y CONTRASEÑAS PREDETERMINADAS (grupo1 a grupo14 / clave1 a clave14) */
         const USERS = {};
         for(let i = 1; i <= 14; i++) {
             USERS[`grupo${i}`] = `clave${i}`;
         }
 
-        /* 2. PISTAS Y CLAVES SECRETAS POR VISTA (Adaptables a necesidad) */
+        /* 2. CONTENIDO DE LOS SOBRES Y CÓDIGOS SECRETOS */
         const STAGES = [
             {
                 title: "SOBRE DE SEGURIDAD N° 1",
                 subtitle: "La Fisura en la Fachada",
-                content: `"Apreciados detectives: Examinen los cimientos. Una fisura casi imperceptible recorre la pared exterior desde el techo hasta el agua turbia. ¿Cuál es la palabra clave que define esta grieta?"`,
+                content: `"Apreciados detectives:<br>Una fisura apenas perceptible se extiende desde el tejado del edificio, descendiendo en zigzag por el muro hasta perderse en las oscuras aguas del estanque.<br><br><strong>Pregunta:</strong> ¿Cuál es la palabra que describe esta grieta mortal?"`,
                 answer: "CRACK",
                 altAnswer: "GRIETA"
             },
             {
                 title: "SOBRE DE SEGURIDAD N° 2",
                 subtitle: "Mystery Object #3",
-                content: `"Mystery Object #3: <strong>YPEW_ITER</strong><br><br>Pista: <em>'Before computers, writers clicked on this machine.'</em> Completa el nombre del artefacto."`,
+                content: `"Objeto del despacho:<br><strong>YPEW_ITER</strong><br><br><strong>Pista:</strong> <em>'Before computers, writers clicked on this machine.'</em> Escribe el nombre completo en inglés o español del artefacto."`,
                 answer: "TYPEWRITER",
                 altAnswer: "MAQUINA DE ESCRIBIR"
             },
             {
                 title: "SOBRE DE SEGURIDAD N° 3",
                 subtitle: "Mystery Object #6",
-                content: `"Mystery Object #6: <strong>LAN_ERN</strong><br><br>Pista: <em>'Brings light in the dark, before electricity.'</em> Escribe la palabra que ilumina las catacumbas."`,
+                content: `"Objeto de la cripta:<br><strong>LAN_ERN</strong><br><br><strong>Pista:</strong> <em>'Brings light in the dark, before electricity.'</em> Escribe la palabra del objeto que porta la llama en la oscuridad."`,
                 answer: "LANTERN",
                 altAnswer: "LINTERNA"
             },
             {
                 title: "SOBRE DE SEGURIDAD N° 4",
                 subtitle: "Mystery Object #7",
-                content: `"Mystery Object #7: <strong>HONOGR_PH</strong><br><br>Pista: <em>'An early device that recorded and played sound.'</em> Completa la máquina que reproducía los sonidos del ataúd."`,
+                content: `"Último secreto:<br><strong>HONOGR_PH</strong><br><br><strong>Pista:</strong> <em>'An early device that recorded and played sound.'</em> Completa el nombre del dispositivo que reproduce el eco de la tumba."`,
                 answer: "PHONOGRAPH",
                 altAnswer: "FONOGRAFO"
             }
@@ -466,14 +551,13 @@
 
         let currentStage = 0;
 
-        /* 3. CAMBIO DE VISTAS */
         function switchView(viewId) {
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* 4. LOGIN */
+        /* Login */
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const user = document.getElementById('username').value.trim().toLowerCase();
@@ -484,32 +568,32 @@
                 errorDiv.innerText = '';
                 switchView('view-intro');
             } else {
-                errorDiv.innerText = 'Usuario o clave incorrecta. (Ej: grupo1 y clave1)';
+                errorDiv.innerText = 'Usuario o clave no válidos (Ej: grupo1 / clave1)';
             }
         });
 
-        /* 5. FLUJO DEL JUEGO */
+        /* Inicio del juego */
         function startEscapeRoom() {
             currentStage = 0;
             loadStage(currentStage);
             switchView('view-game');
         }
 
+        /* Carga de pistas y reseteo del sobre cerrado */
         function loadStage(index) {
             const data = STAGES[index];
             document.getElementById('room-title').innerText = data.title;
             document.getElementById('room-subtitle').innerText = data.subtitle;
-            document.getElementById('envelope-text').innerHTML = data.content;
+            document.getElementById('letter-content').innerHTML = data.content;
             document.getElementById('secret-code').value = '';
             document.getElementById('game-error').innerText = '';
 
-            // Reseteo del sobre cerrado
-            const env = document.getElementById('envelope-box');
-            env.classList.remove('open');
-            document.getElementById('envelope-badge').innerText = 'CERRADO';
-            document.getElementById('envelope-tag').innerText = 'SOBRE CERRADO';
+            // Cerrar el sobre visualmente
+            const scene = document.getElementById('envelope-scene');
+            scene.classList.remove('open');
+            document.getElementById('envelope-action-text').innerText = "✉️ Haz clic en el sobre para romper el sello";
 
-            // Actualizar círculos indicadores
+            // Indicadores de progreso
             for (let i = 1; i <= 4; i++) {
                 const step = document.getElementById(`step-${i}`);
                 step.classList.remove('active', 'done');
@@ -521,32 +605,30 @@
             }
         }
 
+        /* Alternar animación física del sobre */
         function toggleEnvelope() {
-            const env = document.getElementById('envelope-box');
-            const badge = document.getElementById('envelope-badge');
-            const tag = document.getElementById('envelope-tag');
-            env.classList.toggle('open');
+            const scene = document.getElementById('envelope-scene');
+            const actionText = document.getElementById('envelope-action-text');
+            scene.classList.toggle('open');
 
-            if (env.classList.contains('open')) {
-                badge.innerText = 'ABIERTO';
-                tag.innerText = 'CARTA ABIERTA';
+            if (scene.classList.contains('open')) {
+                actionText.innerText = "📜 Carta extraída (Toca para volver a guardar)";
             } else {
-                badge.innerText = 'CERRADO';
-                tag.innerText = 'SOBRE CERRADO';
+                actionText.innerText = "✉️ Haz clic en el sobre para romper el sello";
             }
         }
 
+        /* Validación de clave secreta */
         function validateStepCode() {
             const input = document.getElementById('secret-code').value.trim().toUpperCase();
             const currentData = STAGES[currentStage];
             const errorDiv = document.getElementById('game-error');
 
             if (!input) {
-                errorDiv.innerText = 'Por favor escribe la clave secreta.';
+                errorDiv.innerText = 'Por favor ingresa la clave secreta.';
                 return;
             }
 
-            // Normalización para tolerar tildes y espacios accidentales
             const cleanInput = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const cleanAns = currentData.answer.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const cleanAlt = currentData.altAnswer ? currentData.altAnswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : null;
@@ -561,11 +643,10 @@
                     switchView('view-victory');
                 }
             } else {
-                errorDiv.innerText = 'Clave incorrecta. Revisa con atención el texto y la pista.';
+                errorDiv.innerText = 'Clave incorrecta. Examina bien el pergamino.';
             }
         }
 
-        // Permitir presionar ENTER en el input de clave
         document.getElementById('secret-code').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
