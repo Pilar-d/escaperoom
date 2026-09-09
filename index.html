@@ -85,7 +85,7 @@
 
         .container {
             width: 100%;
-            max-width: 840px;
+            max-width: 880px;
             background: var(--card-bg);
             border: 2px solid var(--accent-gold);
             border-radius: 10px;
@@ -179,7 +179,6 @@
             box-shadow: 0 0 14px var(--accent-gold);
         }
 
-        /* Botón secundario para lectura de PDF */
         .btn-secondary {
             background: linear-gradient(180deg, #382c23 0%, #1f1813 100%);
             border: 1px solid #755a3d;
@@ -237,16 +236,16 @@
         }
 
         /* ========================================================
-           SOBRE REALISTA FLUIDO CON SELLO CENTRAL
+           SOBRE REALISTA FLUIDO
            ======================================================== */
         .envelope-scene {
             width: 100%;
-            max-width: 440px;
-            margin: 30px auto 35px;
+            max-width: 680px;
+            margin: 20px auto;
             perspective: 1200px;
             cursor: pointer;
             user-select: none;
-            transition: margin 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: margin 0.5s ease;
         }
 
         .envelope-hint {
@@ -265,7 +264,7 @@
         .envelope {
             position: relative;
             width: 100%;
-            height: 220px;
+            height: 240px;
             background: var(--env-back);
             border-radius: 4px 4px 8px 8px;
             box-shadow: 0 16px 30px rgba(0,0,0,0.75);
@@ -276,7 +275,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 125px;
+            height: 135px;
             background: var(--env-flap);
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top center;
@@ -347,25 +346,33 @@
 
         .letter-paper {
             position: absolute;
-            left: 6%;
+            left: 3%;
             top: 15px;
-            width: 88%;
-            height: 190px;
+            width: 94%;
+            height: 210px;
             background: var(--parchment);
             color: #241913;
-            padding: 16px 20px;
+            padding: 18px 20px;
             border-radius: 4px;
             border: 1px solid var(--parchment-border);
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            font-style: italic;
-            font-size: clamp(0.92rem, 2.3vw, 1.05rem);
-            line-height: 1.5;
+            font-size: clamp(0.88rem, 2vw, 0.98rem);
+            line-height: 1.45;
             z-index: 2;
             box-sizing: border-box;
-            transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s, 
+            transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s, 
                         z-index 0.01s 0.35s, 
-                        box-shadow 0.65s ease 0.15s;
-            overflow: hidden;
+                        box-shadow 0.5s ease;
+            overflow-y: auto;
+            max-height: 440px;
+        }
+
+        .letter-paper::-webkit-scrollbar {
+            width: 6px;
+        }
+        .letter-paper::-webkit-scrollbar-thumb {
+            background: #b59f77;
+            border-radius: 3px;
         }
 
         .envelope-scene.open .envelope-flap {
@@ -380,40 +387,158 @@
         }
 
         .envelope-scene.open .letter-paper {
-            transform: translateY(-135px);
+            transform: translateY(-30px);
             z-index: 10;
             height: auto;
             min-height: 220px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.7);
-            overflow: visible;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
         }
 
         .envelope-scene.open {
-            margin-bottom: 165px;
+            margin-bottom: 25px;
         }
 
-        @media (max-width: 480px) {
+        /* Tarjetas y Estructuras */
+        .challenge-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .challenge-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: #5c1818;
+            border-bottom: 2px solid #8e2b2b;
+            padding-bottom: 4px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .challenge-portrait {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 2px solid #4a3424;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+            background: #2a201a;
+        }
+
+        .challenge-center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 4px 0 8px;
+        }
+
+        .challenge-center-image img {
+            width: 100%;
+            max-width: 320px;
+            height: 190px;
+            object-fit: cover;
+            border: 2px solid #4a3424;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            background: #2a201a;
+        }
+
+        .challenge-data {
+            font-style: normal;
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+
+        .challenge-data p {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .challenge-data strong {
+            color: #3b1c1c;
+            font-family: 'Cinzel', serif;
+        }
+
+        .challenge-task {
+            margin-top: 8px;
+            padding: 10px 12px;
+            background: rgba(142, 43, 43, 0.08);
+            border-left: 3px solid #8e2b2b;
+            font-size: 0.92rem;
+            font-style: italic;
+        }
+
+        .two-col-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.88rem;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid #c4b18c;
+        }
+
+        .two-col-table th {
+            background: #e4d0b1;
+            color: #4a2419;
+            font-family: 'Cinzel', serif;
+            padding: 8px 10px;
+            border: 1px solid #c4b18c;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .two-col-table td {
+            padding: 8px 10px;
+            border: 1px solid #c4b18c;
+            vertical-align: top;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .two-col-table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        @media (max-width: 600px) {
+            .challenge-grid {
+                grid-template-columns: 1fr;
+            }
+            .challenge-portrait {
+                height: 190px;
+                max-width: 220px;
+                margin: 0 auto 10px;
+            }
+            .challenge-center-image img {
+                max-width: 100%;
+                height: 170px;
+            }
+            .two-col-table th, .two-col-table td {
+                padding: 6px;
+                font-size: 0.82rem;
+            }
             .envelope {
-                height: 180px;
+                height: 200px;
             }
             .envelope-flap {
-                height: 105px;
-            }
-            .wax-seal {
-                width: 38px;
-                height: 38px;
-                font-size: 0.95rem;
-                bottom: 4px;
+                height: 115px;
             }
             .letter-paper {
-                height: 155px;
-                padding: 14px;
+                height: 170px;
+                padding: 12px;
             }
             .envelope-scene.open .letter-paper {
-                transform: translateY(-115px);
+                transform: translateY(-20px);
             }
             .envelope-scene.open {
-                margin-bottom: 150px;
+                margin-bottom: 25px;
             }
         }
 
@@ -423,9 +548,7 @@
             padding-top: clamp(14px, 3vw, 20px);
         }
 
-        /* ========================================================
-           VISOR DE PDF ADAPTABLE (BAJO EL INPUT)
-           ======================================================== */
+        /* Visor de PDF Adaptable */
         .pdf-section {
             margin-top: 20px;
             display: flex;
@@ -434,7 +557,7 @@
         }
 
         .pdf-viewer-container {
-            display: none; /* Oculto inicialmente */
+            display: none;
             width: 100%;
             margin-top: 10px;
             background: #141112;
@@ -502,7 +625,7 @@
         .pdf-frame-wrapper {
             position: relative;
             width: 100%;
-            height: clamp(380px, 60vh, 580px); /* Altura fluida que no desborda */
+            height: clamp(380px, 60vh, 580px);
             background: #2b2b2b;
         }
 
@@ -537,8 +660,8 @@
 
             <form id="login-form">
                 <div class="form-group">
-                    <label for="username">Usuario (grupo1 al grupo14)</label>
-                    <input type="text" id="username" placeholder="grupo1" required autocomplete="off" autocapitalize="none">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" placeholder="Grupo 1" required autocomplete="off" autocapitalize="none">
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
@@ -556,16 +679,16 @@
             
             <p><strong>Apreciados detectives:</strong> Una melancolía insoportable envuelve estos muros. Una grieta recorre la fachada y la cordura de nuestra estirpe se desmorona. Las pesadas puertas de roble se han cerrado tras ustedes...</p>
             
-            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán abrir y descifrar <strong>4 sobres de seguridad consecutivos</strong>[cite: 1].</p>
+            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán abrir y descifrar <strong>4 sobres de seguridad consecutivos</strong></p>
             
             <p style="background: rgba(0,0,0,0.35); padding: 14px; border-left: 3px solid var(--accent-gold); font-size: clamp(0.9rem, 2.2vw, 1rem);">
-                ⏳ <strong>Reglas del Enigma:</strong> Cuentan con un máximo de 60 minutos[cite: 1]. Si se quedan estancados más de 5 minutos, el vocero puede pedir una pista a cambio de que el grupo permanezca en silencio por 1 minuto[cite: 1].
+                ⏳ <strong>Reglas del Enigma:</strong> Cuentan con un máximo de 45 minutos. Si se quedan estancados más de 5 minutos, el vocero puede pedir una pista a cambio de que el grupo permanezca en silencio por 1 minuto.
             </p>
 
             <button type="button" class="btn" onclick="startEscapeRoom()">Abrir Primer Sobre</button>
         </section>
 
-        <!-- VISTA JUEGO: SOBRES REALISTAS Y PDF DE APOYO -->
+        <!-- VISTA JUEGO: SOBRES Y VISOR PDF -->
         <section id="view-game" class="view-section">
             <div class="progress-bar">
                 <div class="step-circle" id="step-1">1</div>
@@ -575,30 +698,28 @@
             </div>
 
             <h2 id="room-title">SOBRE DE SEGURIDAD N° 1</h2>
-            <div class="subtitle" id="room-subtitle">Primera Evidencia</div>
+            <div class="subtitle" id="room-subtitle">Expediente Clínico</div>
 
-            <!-- ESCENA DEL SOBRE MEJORADA -->
+            <!-- SOBRE INTERACTIVO -->
             <div class="envelope-scene" id="envelope-scene" onclick="toggleEnvelope()">
                 <div class="envelope-hint">
                     <span id="envelope-action-text">✉️ Presiona el sello de lacre para abrir el sobre</span>
                 </div>
                 <div class="envelope">
-                    <!-- Solapa triangular superior con sello central -->
                     <div class="envelope-flap">
                         <div class="wax-seal">U</div>
                     </div>
 
-                    <!-- Carta interior que sube suavemente -->
+                    <!-- Hoja interior que emerge -->
                     <div class="letter-paper" id="letter-content"></div>
 
-                    <!-- Capas del bolsillo -->
                     <div class="envelope-pocket-left"></div>
                     <div class="envelope-pocket-right"></div>
                     <div class="envelope-pocket-bottom"></div>
                 </div>
             </div>
 
-            <!-- Desbloqueo, Clave secreta y Sección del PDF -->
+            <!-- Entrada de clave secreta y Visor PDF -->
             <div class="solve-container">
                 <div class="form-group">
                     <label for="secret-code">Para continuar con la siguiente sección, ingresa la clave secreta:</label>
@@ -607,7 +728,7 @@
                 <button type="button" class="btn" onclick="validateStepCode()">Validar Clave</button>
                 <div id="game-error" class="error-msg"></div>
 
-                <!-- SECCIÓN DE LECTURA DEL PDF (BAJO EL INPUT DE CONTRASEÑA) -->
+                <!-- LECTOR DE PDF INCRUSTADO -->
                 <div class="pdf-section">
                     <button type="button" class="btn btn-secondary" id="toggle-pdf-btn" onclick="togglePdfViewer()">
                         📖 Leer PDF del Enigma (Consultar Material)
@@ -615,7 +736,7 @@
 
                     <div class="pdf-viewer-container" id="pdf-viewer-box">
                         <div class="pdf-header-bar">
-                            <span class="pdf-header-title">📄 Documento: La Caída de la Casa de Usher </span>
+                            <span class="pdf-header-title">📄 Documento: Escape room 8vo.pdf</span>
                             <div class="pdf-header-actions">
                                 <a id="pdf-external-link" href="750La-Caida-de-la-Casa-de-Usher.pdf" target="_blank" class="pdf-btn-small">
                                     ↗ Pantalla Completa
@@ -626,7 +747,6 @@
                             </div>
                         </div>
                         <div class="pdf-frame-wrapper">
-                            <!-- El lector PDF se inyecta dinámicamente al abrir -->
                             <div id="pdf-container-target" style="width: 100%; height: 100%;"></div>
                         </div>
                     </div>
@@ -643,7 +763,7 @@
                 <div class="subtitle" style="color: var(--accent-gold-light); margin-top: 10px;">¡Han escapado de la Casa Usher!</div>
                 
                 <p style="font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin: 20px 0;">
-                    ¡Felicitaciones al equipo que logró descifrar todos los enigmas y salvar su vida antes de que la mansión colapsara[cite: 1]!
+                    ¡Felicitaciones al equipo que logró descifrar todos los enigmas y salvar su vida antes de que la mansión colapsara![cite: 1]
                 </p>
 
                 <p style="font-size: clamp(0.9rem, 2.2vw, 1rem); color: #a39587;">
@@ -657,47 +777,131 @@
     </div>
 
     <script>
-        /* ==========================================
-           CONFIGURACIÓN DEL ARCHIVO PDF
-           Coloca el archivo PDF en la misma carpeta
-           ========================================== */
         const PDF_FILE_URL = "750La-Caida-de-la-Casa-de-Usher.pdf";
 
-        /* 1. USUARIOS Y CONTRASEÑAS (grupo1 a grupo14 / clave1 a clave14) */
-        const USERS = {};
-        for(let i = 1; i <= 14; i++) {
-            USERS[`grupo${i}`] = `clave${i}`;
+        /* 1. CONTRASEÑAS POR GRUPO (grupo1 a grupo14 con clave1 a clave14) */
+        const PASSWORDS = {};
+        for (let i = 1; i <= 14; i++) {
+            PASSWORDS[i] = `clave${i}`;
         }
 
-        /* 2. ENIGMAS Y RESPUESTAS */
+        /* 2. ENIGMAS Y CONTENIDO DE CADA SOBRE */
         const STAGES = [
             {
-                title: "SOBRE DE SEGURIDAD N° 1",
-                subtitle: "La Fisura en la Fachada",
-                content: `"Apreciados detectives:<br>Una fisura apenas perceptible se extiende desde el tejado del edificio, descendiendo en zigzag por el muro hasta perderse en las oscuras aguas del estanque.<br><br><strong>Pregunta:</strong> ¿Cuál es la palabra que describe esta grieta mortal?"`,
-                answer: "CRACK",
-                altAnswer: "GRIETA"
+                title: "SOBRE 1: EXPEDIENTE DE RODERICK USHER",
+                subtitle: "Expediente Clínico Confidencial",
+                content: `
+                    <div class="challenge-card">
+                        <div class="challenge-title">EXPEDIENTE CLÍNICO: RODERICK USHER</div>
+                        <div class="challenge-grid">
+                            <img src="roderick-usher.jpeg" alt="Roderick Usher" class="challenge-portrait" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=400&q=80'">
+                            <div class="challenge-data">
+                                <p><strong>Nombre completo:</strong> Roderick Usher</p>
+                                <p><strong>Edad aproximada:</strong> 30–40 años</p>
+                                <p><strong>Residencia:</strong> Mansión Usher</p>
+                                <p><strong>Familia:</strong> Lady Madeline Usher</p>
+                                <p><strong>Diagnóstico:</strong> …</p>
+                            </div>
+                        </div>
+                        <div class="challenge-task">
+                            <strong>Misión del Equipo:</strong><br>
+                            Identificar en el texto qué dice el narrador respecto de la <em>"agudeza morbosa de los sentidos"</em> de Roderick y cómo afecta en la percepción como lector aquella descripción. Utilicen al menos una cita para sustentar su respuesta.
+                        </div>
+                    </div>
+                `,
+                answer: "HIPOCONDRIACO"
             },
             {
-                title: "SOBRE DE SEGURIDAD N° 2",
-                subtitle: "Mystery Object #3",
-                content: `"Objeto del despacho:<br><strong>YPEW_ITER</strong><br><br><strong>Pista:</strong> <em>'Before computers, writers clicked on this machine.'</em> Escribe el nombre completo del artefacto."`,
-                answer: "TYPEWRITER",
-                altAnswer: "MAQUINA DE ESCRIBIR"
+                title: "SOBRE 2: EL CLIMA Y EL MUNDO INTERIOR",
+                subtitle: "La Tempestad y la Psique",
+                content: `
+                    <div class="challenge-card">
+                        <div class="challenge-title"></div>
+                        
+                        <div class="challenge-center-image">
+                            <img src="mansion-tormenta.jpeg" alt="Mansión Usher bajo la tormenta" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80'">
+                        </div>
+
+                        <div class="challenge-task">
+                            <strong>Misión del Equipo:</strong><br>
+                            ¿Cómo se ve reflejado el mundo interior de los personajes en el clima o el entorno natural que los rodea? Redacten una respuesta estructurada que explique la conexión entre la tormenta eléctrica/las nubes pesadas de la noche final y el brote de locura/terror de Roderick.
+                        </div>
+                    </div>
+                `,
+                answer: "ATMOSFERA"
             },
             {
-                title: "SOBRE DE SEGURIDAD N° 3",
-                subtitle: "Mystery Object #6",
-                content: `"Objeto de la cripta:<br><strong>LAN_ERN</strong><br><br><strong>Pista:</strong> <em>'Brings light in the dark, before electricity.'</em> Escribe la palabra que ilumina las tinieblas."`,
-                answer: "LANTERN",
-                altAnswer: "LINTERNA"
+                title: "SOBRE 3: LA LEYENDA Y LA REALIDAD",
+                subtitle: "Paralelismo Acústico en la Mansión",
+                content: `
+                    <div class="challenge-card">
+                        <div class="challenge-title"></div>
+                        <p style="font-size: 0.9rem; margin-bottom: 6px;">
+                            Emparejen los acontecimientos de la leyenda de Sir Launcelot (el crujir de la madera al romper la puerta, el alarido del dragón moribundo, el sonido metálico del escudo) con los ruidos reales que provienen del foso donde Madeline intenta salir:
+                        </p>
+                        
+                        <table class="two-col-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50%;">Columna A (Obra de Launcelot)</th>
+                                    <th style="width: 50%;">Columna B (Narración original)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>1.</strong> "...levantó su maza, y con unos golpes abrió pronto un camino, a través de las tablas de la puerta, a su mano enguantada de hierro; y entonces, tirando con ella vigorosamente hacia sí, hizo crujir, hundirse y saltar todo en pedazos, de tal modo, que el ruido de la madera seca y sonando a hueco repercutió de una parte a otra de la selva."
+                                    </td>
+                                    <td>
+                                        ___ "...érame imposible decir de qué dirección venía– un ruido débil y como lejano; pero áspero, prolongado, singularmente agudo y estridente, la contrapartida exacta del grito sobrenatural del dragón descrito por el novelista y tal cual mi imaginación se lo había ya figurado."
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>2.</strong> "Y Ethelredo levantó su maza y golpeó sobre la cabeza del dragón, que cayó ante él y emitió su aliento pestilente con un ruido tan horrendo, áspero y penetrante a la vez, que Ethelredo tuvo que taparse los oídos con las manos para resistir del terrible estruendo como no lo había él oído nunca antes."
+                                    </td>
+                                    <td>
+                                        ___ "y como si en realidad hubiera caído en aquel momento un escudo de bronce pesadamente sobre un suelo de plata, oí el eco claro, profundo, metálico, resonante, si bien sordo en apariencia."
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>3.</strong> "Y ahora el campeón, habiendo escapado de la terrible furia del dragón, y recordando el escudo de bronce, y que el encantamiento que sobre él pesaba estaba roto, apartó la masa muerta de delante de su camino y avanzó valientemente por el suelo de plata del castillo hacia el sitio del muro de donde colgaba el escudo; el cual, en verdad, no esperó a que estuviese él muy cerca, sino que cayó a sus pies sobre el pavimento de plata, con un pesado y terrible ruido."
+                                    </td>
+                                    <td>
+                                        ___ "...una parte muy alejada de la mansión llegaba confuso a mis oídos un ruido que se hubiera dicho, a causa de su exacta semejanza de tono, el eco (pero sofocado y sordo, ciertamente) de aquel ruido real de crujido y de arrancamiento."
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="challenge-task">
+                            <strong>Pregunta de Análisis:</strong><br>
+                            Expliquen cómo el orden alternado de los hechos (lectura vs. realidad) genera el efecto de suspenso que aumenta progresivamente antes de la aparición final. Fundamenten su respuesta.
+                        </div>
+                    </div>
+                `,
+                answer: "CLIMAX"
             },
             {
-                title: "SOBRE DE SEGURIDAD N° 4",
-                subtitle: "Mystery Object #7",
-                content: `"Último secreto:<br><strong>HONOGR_PH</strong><br><br><strong>Pista:</strong> <em>'An early device that recorded and played sound.'</em> Completa el nombre del dispositivo que reproduce el eco de la tumba."`,
-                answer: "PHONOGRAPH",
-                altAnswer: "FONOGRAFO"
+                title: "SOBRE 4: EL ENCIERRO Y LA CULPA",
+                subtitle: "El Secreto de la Cripta",
+                content: `
+                    <div class="challenge-card">
+                        <div class="challenge-title"></div>
+                        
+                        <div class="challenge-task" style="margin-top: 4px;">
+                            <strong>Pregunta 1: Aislamiento y Represión:</strong><br>
+                            ¿Qué prejuicios o miedos de la época reflejan el aislamiento de la familia Usher hacia el exterior? ¿Cómo se conecta con la necesidad de expresar las emociones y sentir? Fundamenten su respuesta.
+                        </div>
+
+                        <div class="challenge-task">
+                            <strong>Pregunta 2: El Dilema de la Cripta:</strong><br>
+                            ¿Cuál es la motivación que existe en Roderick al momento de depositar a su hermana en la cripta? y ¿Qué dilema enfrenta al darse cuenta que su hermana sí estaba viva? Fundamenten su respuesta.
+                        </div>
+                    </div>
+                `,
+                answer: "SIXSEVEN"
             }
         ];
 
@@ -710,29 +914,40 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Manejador de Login */
+        /* 3. LOGIN FLEXIBLE
+           Acepta variaciones de mayúsculas, minúsculas y espacios:
+           grupo1, grupo 1, Grupo1, GRUPO1, GRUPO 1, etc.
+        */
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const user = document.getElementById('username').value.trim().toLowerCase();
+            const rawUser = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value.trim();
             const errorDiv = document.getElementById('login-error');
 
-            if (USERS[user] && USERS[user] === pass) {
-                errorDiv.innerText = '';
-                switchView('view-intro');
-            } else {
-                errorDiv.innerText = 'Usuario o clave incorrecta (Ej: grupo1 / clave1)';
+            // Limpieza: quita espacios y pasa a minúsculas ("GRUPO 1" -> "grupo1")
+            const normalizedUser = rawUser.toLowerCase().replace(/\s+/g, '');
+            const match = normalizedUser.match(/^grupo(\d+)$/);
+
+            if (match) {
+                const groupNumber = parseInt(match[1], 10);
+                if (groupNumber >= 1 && groupNumber <= 14) {
+                    if (PASSWORDS[groupNumber] === pass) {
+                        errorDiv.innerText = '';
+                        switchView('view-intro');
+                        return;
+                    }
+                }
             }
+
+            errorDiv.innerText = 'Usuario o clave incorrecta. (Ej: Grupo 1 con clave1)';
         });
 
-        /* Inicio del juego */
         function startEscapeRoom() {
             currentStage = 0;
             loadStage(currentStage);
             switchView('view-game');
         }
 
-        /* Carga de la vista actual y restauración del sobre */
         function loadStage(index) {
             const data = STAGES[index];
             document.getElementById('room-title').innerText = data.title;
@@ -741,12 +956,10 @@
             document.getElementById('secret-code').value = '';
             document.getElementById('game-error').innerText = '';
 
-            // Cerrar el sobre visualmente
             const scene = document.getElementById('envelope-scene');
             scene.classList.remove('open');
             document.getElementById('envelope-action-text').innerText = "✉️ Presiona el sello de lacre para abrir el sobre";
 
-            // Indicador de pasos
             for (let i = 1; i <= 4; i++) {
                 const step = document.getElementById(`step-${i}`);
                 step.classList.remove('active', 'done');
@@ -758,38 +971,31 @@
             }
         }
 
-        /* Toggle apertura del sobre */
         function toggleEnvelope() {
             const scene = document.getElementById('envelope-scene');
             const actionText = document.getElementById('envelope-action-text');
             scene.classList.toggle('open');
 
             if (scene.classList.contains('open')) {
-                actionText.innerText = "📜 Carta desplegada (Toca de nuevo para guardar)";
+                actionText.innerText = "📜 Desafío desplegado (Toca para guardar)";
             } else {
                 actionText.innerText = "✉️ Presiona el sello de lacre para abrir el sobre";
             }
         }
 
-        /* ========================================================
-           CONTROLADOR DEL VISOR DE PDF
-           ======================================================== */
         function togglePdfViewer() {
             const pdfBox = document.getElementById('pdf-viewer-box');
             const toggleBtn = document.getElementById('toggle-pdf-btn');
             const containerTarget = document.getElementById('pdf-container-target');
             const externalLink = document.getElementById('pdf-external-link');
 
-            // Actualizar enlace directo al PDF
             externalLink.setAttribute('href', PDF_FILE_URL);
-
             const isVisible = pdfBox.classList.contains('visible');
 
             if (!isVisible) {
                 pdfBox.classList.add('visible');
                 toggleBtn.innerText = "🔼 Ocultar Lector PDF";
 
-                // Carga diferida del elemento embed/iframe solo cuando se abre
                 if (!pdfLoaded) {
                     containerTarget.innerHTML = `
                         <object data="${PDF_FILE_URL}#toolbar=1&navpanes=0&scrollbar=1" type="application/pdf" width="100%" height="100%">
@@ -804,7 +1010,6 @@
                     pdfLoaded = true;
                 }
 
-                // Desplazamiento suave hacia el lector sin tapar la parte superior
                 setTimeout(() => {
                     pdfBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
@@ -814,7 +1019,6 @@
             }
         }
 
-        /* Validación del código */
         function validateStepCode() {
             const input = document.getElementById('secret-code').value.trim().toUpperCase();
             const currentData = STAGES[currentStage];
@@ -827,9 +1031,8 @@
 
             const cleanInput = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const cleanAns = currentData.answer.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const cleanAlt = currentData.altAnswer ? currentData.altAnswer.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : null;
 
-            if (cleanInput === cleanAns || (cleanAlt && cleanInput === cleanAlt)) {
+            if (cleanInput === cleanAns) {
                 errorDiv.innerText = '';
                 currentStage++;
 
@@ -839,7 +1042,7 @@
                     switchView('view-victory');
                 }
             } else {
-                errorDiv.innerText = 'Clave incorrecta. Analiza con cuidado la pista en el pergamino o en el PDF.';
+                errorDiv.innerText = 'Clave incorrecta. Revisa la clave secreta correspondiente.';
             }
         }
 
