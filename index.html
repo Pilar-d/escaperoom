@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Escape Room Literario - El Enigma de la Casa Usher</title>
-    <!-- Google Fonts -->
+    <!-- Google Fonts Clásicas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark: #0a0809;
-            --card-bg: rgba(22, 18, 17, 0.96);
+            --bg-dark: #090708;
+            --card-bg: rgba(20, 16, 15, 0.96);
             --accent-gold: #c5a059;
             --accent-gold-light: #f0d599;
-            --parchment: #f6edd9;
-            --parchment-border: #d8c49d;
-            --envelope-base: #3b281c;
-            --envelope-pocket: #4a3424;
-            --envelope-flap: #5c412d;
-            --wax-red: #8b1e1e;
+            --parchment: #f4ecda;
+            --parchment-border: #d4c19a;
+            --env-back: #261911;
+            --env-pocket: #3d291c;
+            --env-pocket-sides: #463022;
+            --env-flap: #4a3323;
+            --wax-color: #8c1d1d;
         }
 
         * {
@@ -33,7 +34,7 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 15%, rgba(65, 48, 40, 0.5) 0%, rgba(10, 8, 9, 0.98) 75%),
+                radial-gradient(circle at 50% 15%, rgba(65, 48, 40, 0.5) 0%, rgba(9, 7, 8, 0.98) 75%),
                 linear-gradient(to bottom, transparent, #000 95%);
             color: #d6cfc7;
             font-family: 'IM Fell English', serif;
@@ -223,15 +224,16 @@
         }
 
         /* ========================================================
-           ANIMACIÓN DEL SOBRE REALISTA EN CSS 3D
+           SOBRE REALISTA CON FÍSICAS FLUIDAS Y SELLO CENTRAL
            ======================================================== */
         .envelope-scene {
             width: 100%;
             max-width: 440px;
-            margin: 25px auto;
+            margin: 30px auto 35px;
             perspective: 1200px;
             cursor: pointer;
             user-select: none;
+            transition: margin 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .envelope-hint {
@@ -239,7 +241,7 @@
             font-family: 'Cinzel', serif;
             font-size: clamp(0.8rem, 2.2vw, 0.95rem);
             color: var(--accent-gold-light);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
@@ -251,138 +253,160 @@
             position: relative;
             width: 100%;
             height: 220px;
-            background: var(--envelope-base);
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.7);
-            transition: transform 0.4s ease;
+            background: var(--env-back);
+            border-radius: 4px 4px 8px 8px;
+            box-shadow: 0 16px 30px rgba(0,0,0,0.75);
         }
 
-        .envelope:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Solapa superior plegable con rotación 3D */
+        /* 1. Solapa superior triangular con punto de pivote exacto en la cima */
         .envelope-flap {
             position: absolute;
             top: 0;
             left: 0;
-            width: 0;
-            height: 0;
-            border-left: 220px solid transparent;
-            border-right: 220px solid transparent;
-            border-top: 130px solid var(--envelope-flap);
+            width: 100%;
+            height: 125px;
+            background: var(--env-flap);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top center;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.35s;
+            /* Transición fluida de apertura (0.55s) y cierre en reversa */
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.28s;
             z-index: 5;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
         }
 
-        /* Sello de lacre */
+        /* Sello de lacre ubicado en la punta del triángulo (cierre real) */
         .wax-seal {
             position: absolute;
-            top: -145px;
-            left: -24px;
-            width: 48px;
-            height: 48px;
-            background: radial-gradient(circle, #aa2424 0%, var(--wax-red) 70%, #5e0d0d 100%);
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle at 35% 35%, #b92b2b, var(--wax-color) 60%, #4f0e0e 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffc7c7;
+            color: #f7d2d2;
             font-family: 'Cinzel', serif;
             font-size: 1.1rem;
             font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.6), inset 0 0 4px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.3);
             border: 2px dashed #991f1f;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.25s ease, transform 0.25s ease;
             pointer-events: none;
         }
 
-        /* Bolsillo frontal del sobre */
-        .envelope-pocket {
+        /* 2. Bolsillos laterales e inferior que crean la cavidad real */
+        .envelope-pocket-left {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 0;
-            height: 0;
-            border-left: 220px solid var(--envelope-pocket);
-            border-right: 220px solid var(--envelope-pocket);
-            border-bottom: 120px solid #2f2015;
-            border-top: 100px solid transparent;
-            border-radius: 0 0 8px 8px;
-            z-index: 4;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 0, 0 100%, 50% 50%);
+            background: var(--env-pocket-sides);
+            z-index: 3;
             pointer-events: none;
         }
 
-        /* Hoja de papel (Carta) contenida adentro */
+        .envelope-pocket-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+            background: var(--env-pocket-sides);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .envelope-pocket-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 100%, 100% 100%, 50% 45%);
+            background: var(--env-pocket);
+            border-radius: 0 0 8px 8px;
+            z-index: 4;
+            pointer-events: none;
+            filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.25));
+        }
+
+        /* 3. Carta / Hoja pergamino interior */
         .letter-paper {
             position: absolute;
-            left: 5%;
-            top: 10px;
-            width: 90%;
+            left: 6%;
+            top: 15px;
+            width: 88%;
             height: 190px;
             background: var(--parchment);
             color: #241913;
             padding: 16px 20px;
             border-radius: 4px;
             border: 1px solid var(--parchment-border);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             font-style: italic;
             font-size: clamp(0.92rem, 2.3vw, 1.05rem);
             line-height: 1.5;
-            z-index: 3;
+            z-index: 2; /* Comienza dentro de la bolsa, tapada por los bolsillos */
             box-sizing: border-box;
-            transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.15) 0.5s, z-index 0.1s 0.6s, height 0.4s ease 0.8s;
+            /* Transición fluida con retraso coordinado cuando la solapa se levanta */
+            transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s, 
+                        z-index 0.01s 0.35s, 
+                        box-shadow 0.65s ease 0.15s;
             overflow: hidden;
         }
 
-        /* --- ESTADO ABIERTO: ANIMACIÓN --- */
+        /* --- ESTADO ABIERTO: SINCRONIZACIÓN DE FÍSICA --- */
         .envelope-scene.open .envelope-flap {
             transform: rotateX(180deg);
-            z-index: 1;
+            z-index: 1; /* Pasa detrás de la carta una vez abierta */
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.28s;
         }
 
         .envelope-scene.open .wax-seal {
             opacity: 0;
-            transform: scale(0.6);
+            transform: translateX(-50%) scale(0.5);
         }
 
         .envelope-scene.open .letter-paper {
-            transform: translateY(-130px);
+            /* Sale del sobre hacia arriba y se posiciona en primer plano */
+            transform: translateY(-135px);
             z-index: 10;
             height: auto;
             min-height: 220px;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.65);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.7);
             overflow: visible;
         }
 
         .envelope-scene.open {
-            margin-bottom: 160px; /* Espacio para que la carta no tape el input */
+            margin-bottom: 165px; /* Crea espacio limpio hacia el formulario sin superposiciones */
         }
 
-        /* Responsive para pantallas móviles (ancho del sobre menor a 440px) */
+        /* Ajustes precisos para pantallas pequeñas */
         @media (max-width: 480px) {
             .envelope {
                 height: 180px;
             }
             .envelope-flap {
-                border-left-width: 44vw;
-                border-right-width: 44vw;
-                border-top-width: 105px;
+                height: 105px;
             }
-            .envelope-pocket {
-                border-left-width: 44vw;
-                border-right-width: 44vw;
-                border-bottom-width: 95px;
-                border-top-width: 85px;
+            .wax-seal {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+                bottom: 4px;
             }
             .letter-paper {
                 height: 155px;
                 padding: 14px;
             }
             .envelope-scene.open .letter-paper {
-                transform: translateY(-110px);
+                transform: translateY(-115px);
             }
             .envelope-scene.open {
                 margin-bottom: 150px;
@@ -438,16 +462,16 @@
             
             <p><strong>Apreciados detectives:</strong> Una melancolía insoportable envuelve estos muros. Una grieta recorre la fachada y la cordura de nuestra estirpe se desmorona. Las pesadas puertas de roble se han cerrado tras ustedes...</p>
             
-            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán abrir y resolver <strong>4 sobres de seguridad consecutivos</strong>.</p>
+            <p>Para escapar antes de que la casa colapse y el estanque se trague la propiedad entera, deberán abrir y descifrar <strong>4 sobres de seguridad consecutivos</strong>[cite: 1].</p>
             
             <p style="background: rgba(0,0,0,0.35); padding: 14px; border-left: 3px solid var(--accent-gold); font-size: clamp(0.9rem, 2.2vw, 1rem);">
-                ⏳ <strong>Reglas del Enigma:</strong> Cuentan con un máximo de 60 minutos. Si se quedan estancados más de 5 minutos, el vocero puede solicitar una pista a la docente a cambio de que todo el grupo permanezca en silencio absoluto por 1 minuto.
+                ⏳ <strong>Reglas del Enigma:</strong> Cuentan con un máximo de 60 minutos[cite: 1]. Si se quedan estancados más de 5 minutos, el vocero puede pedir una pista a cambio de que el grupo permanezca en silencio por 1 minuto[cite: 1].
             </p>
 
             <button type="button" class="btn" onclick="startEscapeRoom()">Abrir Primer Sobre</button>
         </section>
 
-        <!-- VISTA JUEGO: SOBRES REALISTAS INTERACTIVOS -->
+        <!-- VISTA JUEGO: SOBRES REALISTAS -->
         <section id="view-game" class="view-section">
             <div class="progress-bar">
                 <div class="step-circle" id="step-1">1</div>
@@ -459,22 +483,24 @@
             <h2 id="room-title">SOBRE DE SEGURIDAD N° 1</h2>
             <div class="subtitle" id="room-subtitle">Primera Evidencia</div>
 
-            <!-- ESCENA DEL SOBRE REALISTA -->
+            <!-- ESCENA DEL SOBRE MEJORADA -->
             <div class="envelope-scene" id="envelope-scene" onclick="toggleEnvelope()">
                 <div class="envelope-hint">
-                    <span id="envelope-action-text">✉️ Haz clic en el sobre para romper el sello</span>
+                    <span id="envelope-action-text">✉️ Presiona el sello de lacre para abrir el sobre</span>
                 </div>
                 <div class="envelope">
-                    <!-- Solapa plegable 3D -->
+                    <!-- Solapa triangular superior con sello central -->
                     <div class="envelope-flap">
                         <div class="wax-seal">U</div>
                     </div>
-                    <!-- Carta interior que sube -->
-                    <div class="letter-paper" id="letter-content">
-                        <!-- El texto del enigma se inyecta aquí -->
-                    </div>
-                    <!-- Bolsillo exterior -->
-                    <div class="envelope-pocket"></div>
+
+                    <!-- Carta interior que sube suavemente -->
+                    <div class="letter-paper" id="letter-content"></div>
+
+                    <!-- Capas del bolsillo para generar profundidad real -->
+                    <div class="envelope-pocket-left"></div>
+                    <div class="envelope-pocket-right"></div>
+                    <div class="envelope-pocket-bottom"></div>
                 </div>
             </div>
 
@@ -497,11 +523,11 @@
                 <div class="subtitle" style="color: var(--accent-gold-light); margin-top: 10px;">¡Han escapado de la Casa Usher!</div>
                 
                 <p style="font-size: clamp(1.05rem, 2.8vw, 1.25rem); margin: 20px 0;">
-                    ¡Felicitaciones al equipo que logró descifrar todos los enigmas y salvar su vida antes de que la mansión colapsara!
+                    ¡Felicitaciones al equipo que logró descifrar todos los enigmas y salvar su vida antes de que la mansión colapsara[cite: 1]!
                 </p>
 
                 <p style="font-size: clamp(0.9rem, 2.2vw, 1rem); color: #a39587;">
-                    Han completado con éxito la actividad del Escape Room Literario.
+                    Han completado con éxito la actividad del Escape Room Literario[cite: 1].
                 </p>
 
                 <button class="btn" onclick="location.reload()" style="max-width: 280px; margin: 25px auto 0;">Jugar de Nuevo</button>
@@ -511,13 +537,13 @@
     </div>
 
     <script>
-        /* 1. USUARIOS Y CONTRASEÑAS PREDETERMINADAS (grupo1 a grupo14 / clave1 a clave14) */
+        /* 1. USUARIOS Y CONTRASEÑAS (grupo1 a grupo14 / clave1 a clave14) */
         const USERS = {};
         for(let i = 1; i <= 14; i++) {
             USERS[`grupo${i}`] = `clave${i}`;
         }
 
-        /* 2. CONTENIDO DE LOS SOBRES Y CÓDIGOS SECRETOS */
+        /* 2. ENIGMAS Y RESPUESTAS */
         const STAGES = [
             {
                 title: "SOBRE DE SEGURIDAD N° 1",
@@ -529,14 +555,14 @@
             {
                 title: "SOBRE DE SEGURIDAD N° 2",
                 subtitle: "Mystery Object #3",
-                content: `"Objeto del despacho:<br><strong>YPEW_ITER</strong><br><br><strong>Pista:</strong> <em>'Before computers, writers clicked on this machine.'</em> Escribe el nombre completo en inglés o español del artefacto."`,
+                content: `"Objeto del despacho:<br><strong>YPEW_ITER</strong><br><br><strong>Pista:</strong> <em>'Before computers, writers clicked on this machine.'</em> Escribe el nombre completo del artefacto."`,
                 answer: "TYPEWRITER",
                 altAnswer: "MAQUINA DE ESCRIBIR"
             },
             {
                 title: "SOBRE DE SEGURIDAD N° 3",
                 subtitle: "Mystery Object #6",
-                content: `"Objeto de la cripta:<br><strong>LAN_ERN</strong><br><br><strong>Pista:</strong> <em>'Brings light in the dark, before electricity.'</em> Escribe la palabra del objeto que porta la llama en la oscuridad."`,
+                content: `"Objeto de la cripta:<br><strong>LAN_ERN</strong><br><br><strong>Pista:</strong> <em>'Brings light in the dark, before electricity.'</em> Escribe la palabra que ilumina las tinieblas."`,
                 answer: "LANTERN",
                 altAnswer: "LINTERNA"
             },
@@ -557,7 +583,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Login */
+        /* Manejador de Login */
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const user = document.getElementById('username').value.trim().toLowerCase();
@@ -568,7 +594,7 @@
                 errorDiv.innerText = '';
                 switchView('view-intro');
             } else {
-                errorDiv.innerText = 'Usuario o clave no válidos (Ej: grupo1 / clave1)';
+                errorDiv.innerText = 'Usuario o clave incorrecta (Ej: grupo1 / clave1)';
             }
         });
 
@@ -579,7 +605,7 @@
             switchView('view-game');
         }
 
-        /* Carga de pistas y reseteo del sobre cerrado */
+        /* Carga de la vista actual y restauración del sobre */
         function loadStage(index) {
             const data = STAGES[index];
             document.getElementById('room-title').innerText = data.title;
@@ -591,9 +617,9 @@
             // Cerrar el sobre visualmente
             const scene = document.getElementById('envelope-scene');
             scene.classList.remove('open');
-            document.getElementById('envelope-action-text').innerText = "✉️ Haz clic en el sobre para romper el sello";
+            document.getElementById('envelope-action-text').innerText = "✉️ Presiona el sello de lacre para abrir el sobre";
 
-            // Indicadores de progreso
+            // Indicador de pasos
             for (let i = 1; i <= 4; i++) {
                 const step = document.getElementById(`step-${i}`);
                 step.classList.remove('active', 'done');
@@ -605,20 +631,20 @@
             }
         }
 
-        /* Alternar animación física del sobre */
+        /* Toggle apertura del sobre */
         function toggleEnvelope() {
             const scene = document.getElementById('envelope-scene');
             const actionText = document.getElementById('envelope-action-text');
             scene.classList.toggle('open');
 
             if (scene.classList.contains('open')) {
-                actionText.innerText = "📜 Carta extraída (Toca para volver a guardar)";
+                actionText.innerText = "📜 Carta desplegada (Toca de nuevo para guardar)";
             } else {
-                actionText.innerText = "✉️ Haz clic en el sobre para romper el sello";
+                actionText.innerText = "✉️ Presiona el sello de lacre para abrir el sobre";
             }
         }
 
-        /* Validación de clave secreta */
+        /* Validación del código */
         function validateStepCode() {
             const input = document.getElementById('secret-code').value.trim().toUpperCase();
             const currentData = STAGES[currentStage];
@@ -643,7 +669,7 @@
                     switchView('view-victory');
                 }
             } else {
-                errorDiv.innerText = 'Clave incorrecta. Examina bien el pergamino.';
+                errorDiv.innerText = 'Clave incorrecta. Analiza con cuidado la pista en el pergamino.';
             }
         }
 
