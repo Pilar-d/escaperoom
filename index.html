@@ -139,7 +139,7 @@
             border: 1px solid var(--accent-gold);
             padding: 10px 14px;
             color: var(--parchment);
-            font-family: inherit;
+            font-family: Arial, Helvetica, sans-serif;
             font-size: clamp(1rem, 2.5vw, 1.15rem);
             border-radius: 4px;
             outline: none;
@@ -661,11 +661,11 @@
             <form id="login-form">
                 <div class="form-group">
                     <label for="username">Usuario</label>
-                    <input type="text" id="username" placeholder="Grupo 1" required autocomplete="off" autocapitalize="none">
+                    <input type="text" id="username" placeholder="Escribe aquí el nombre de tu grupo" required autocomplete="off" autocapitalize="none">
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" id="password" placeholder="clave1" required>
+                    <input type="password" id="password" placeholder="Escribe aquí tu contraseña" required>
                 </div>
                 <button type="submit" class="btn">Ingresar a la Mansión</button>
                 <div id="login-error" class="error-msg"></div>
@@ -736,7 +736,7 @@
 
                     <div class="pdf-viewer-container" id="pdf-viewer-box">
                         <div class="pdf-header-bar">
-                            <span class="pdf-header-title">📄 Documento: Escape room 8vo.pdf</span>
+                            <span class="pdf-header-title">📄 Documento: La Caida de la Casa de Usher</span>
                             <div class="pdf-header-actions">
                                 <a id="pdf-external-link" href="750La-Caida-de-la-Casa-de-Usher.pdf" target="_blank" class="pdf-btn-small">
                                     ↗ Pantalla Completa
@@ -779,9 +779,9 @@
     <script>
         const PDF_FILE_URL = "750La-Caida-de-la-Casa-de-Usher.pdf";
 
-        /* 1. CONTRASEÑAS POR GRUPO (grupo1 a grupo14 con clave1 a clave14) */
+        /* 1. CONTRASEÑAS POR GRUPO (grupo1 a grupo20 con clave1 a clave20) */
         const PASSWORDS = {};
-        for (let i = 1; i <= 14; i++) {
+        for (let i = 1; i <= 20; i++) {
             PASSWORDS[i] = `clave${i}`;
         }
 
@@ -930,7 +930,7 @@
 
             if (match) {
                 const groupNumber = parseInt(match[1], 10);
-                if (groupNumber >= 1 && groupNumber <= 14) {
+                if (groupNumber >= 1 && groupNumber <= 20) {
                     if (PASSWORDS[groupNumber] === pass) {
                         errorDiv.innerText = '';
                         switchView('view-intro');
